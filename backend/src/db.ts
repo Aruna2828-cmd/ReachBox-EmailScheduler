@@ -1,11 +1,10 @@
 import { Pool } from "pg";
 
 const pool = new Pool({
-  host: "localhost",
-  port: 5432,
-  user: "reachbox",
-  password: "reachbox123",
-  database: "reachbox",
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === "production"
+    ? { rejectUnauthorized: false }
+    : false,
 });
 
 export default pool;
